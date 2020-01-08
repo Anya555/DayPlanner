@@ -1,28 +1,44 @@
-var mainArea = document.getElementById("main");
-var inputArea = document.getElementById("input");
-var form = document.getElementById("form");
 
 var eventsList = [];
 
 renderEvents();
 
-// function that creates an input area for each event from 9am to 5 pm (total hours = 9)
+// function that creates an input area for each hour, event from 9am to 5 pm (total hours = 9) and save buttons
 function renderEvents() {
-    inputArea.innerHTML = "";
 
-    for (var i = 0; i <= 9; i++) {
+    for (var i = 0; i < 9; i++) {
         var event = eventsList[i];
+        
+    // making a row    
+        var row = $("<div>");
+        row.addClass("row");
 
-        var input = document.createElement("input");
-        input.textContent = event;
-        inputArea.appendChild(input);
-        console.log(inputArea);
+    // input area for hours
+        var hourBlock = $("<div>");
+        hourBlock.addClass("col-1 hour-block");
+        hourBlock.text();
 
-        var button = document.createElement("button");
-        button.textContent = "Save";
-        inputArea.appendChild(button);
-        button.style.backgroundColor = "DodgerBlue";
-        button.style.color = "white";
-       
+    // input area for user to write down the events
+        var textBlock = $("<div>");
+        textBlock.addClass("col-6 text-block");
+        var textarea = $("<textarea>");
+        textarea.value = event;
+        textBlock.append(textarea);
+
+    // creating save buttons    
+        var saveBlock = $("<div>");
+        saveBlock.addClass("col-1 save-block");
+        var button = $("<button>");
+        button.text("Save");
+        saveBlock.append(button);
+        
+
+        row.append(hourBlock);
+        row.append(textBlock);
+        row.append(saveBlock);
+
+        $("#put-calendar-here").append(row);
+        row.addClass("col-12 offset-2");
+        
     }
 }
