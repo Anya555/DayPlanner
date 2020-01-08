@@ -1,0 +1,17 @@
+#input{
+    width: 400px;
+}
+
+.header{
+    position: absolute;
+    top:30px;
+}
+
+.main-area {
+    padding-top: 80px;
+    margin-top: 100px;
+}
+
+hr{
+    border-top: 3px solid black;
+}

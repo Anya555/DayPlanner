@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,11 +11,45 @@
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
-<body>
-    
 
+<body>
+    <!--making a page layout by using bootstrap grid and filling up a content of a page-->
+
+    <div class="header container">
+        <div class="row">
+            <div class="col-12 offset-4">
+                <h1>WORK DAY SCHEDULER</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 offset-5">
+                <h2>Current day</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-5 offset-4">
+                <hr>
+            </div>
+        </div>
+    </div>
+
+    <!--area to create a planner-->
+    <div class="main-area container" id="main">
+        <div class="row">
+            <div class="col-12 offset-4">
+                <div class="user-input" id="form">
+                    <form id="input" method="POST">
+                        <input type="text" placeholder="" class="event"></input>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="main.js">
-    </script>  
+    </script>
 </body>
+
 </html>
