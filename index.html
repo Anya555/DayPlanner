@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
@@ -13,7 +14,6 @@
 </head>
 
 <body>
-    <!--making a page layout by using bootstrap grid and filling up a content of a page-->
 
     <div class="container">
         <div class="row">
@@ -22,10 +22,10 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12 offset-5">
-                <h2>Current day</h2>
-            </div>
+
+        <!--this is where current day will be displayed-->
+        <div class="row" id="day">
+            <!-- <div class="col-12 offset-5"></div> -->
         </div>
 
 
@@ -34,26 +34,16 @@
                 <hr>
             </div>
         </div>
-    </div>
-   
 
+    </div>
+
+<!--this is where calendar  will be displayed-->
     <div class="container" id="put-calendar-here"> </div>
 
-    <!--area to create a planner-->
-    <!-- <div class="main-area container" id="main">
-        <div class="row">
-            <div class="col-12 offset-4">
-                <div class="user-input" id="form">
-                    <form id="input" method="POST">
-                        <input type="text" placeholder="" class="event"></input>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> -->
+   
+    <script src="main.js"></script>
+    
 
-    <script src="main.js">
-    </script>
 </body>
 
 </html>
