@@ -18,6 +18,7 @@ $(document).ready(function () {
 
 // an array of standard business hours (9 a.m. to 5 p.m.). 
 var hour = ["9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM"];
+var otherHour = ["9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM"];
 
 renderEvents();
 
@@ -59,29 +60,50 @@ function renderEvents() {
         row.addClass("col-12 offset-2");
 
         var currentHour = moment().format('hA');
+        // var currentHour = moment().format('H');  // 24 hour time format
         console.log(currentHour);
+        console.log(hour[i]);
 
         //  each hour should be color coded to reflect whether the time slot is in the past, the present, or the future.
         // This will change depending on the time of day.   
 
 
+        // You are comparing two string values here "9AM" and the current time (right now its "1PM").
+        // We need to convert the two times to Integer values here if we want to compare them in an if() statement.
 
         if ( hour[i] < currentHour ) {
+            console.log("true");
+            textarea.removeClass("future");
+            textarea.removeClass("current");
             textarea.addClass("past");
-        }
-
-        else if (currentHour === hour[i]) {
+        } else if (currentHour === hour[i]) {
             textarea.removeClass("past");
             textarea.addClass("current");
-        }
-
-
-
-        else {
+            textarea.removeClass("future");
+        } else {
             textarea.removeClass("past");
             textarea.removeClass("current");
             textarea.addClass("future");
+            console.log(textarea);
         }
+
+        // var convertArrayHours = otherHour[i].split(" ");
+        // var convertCurrentHour = currentHour.split(" ");
+        // console.log(convertArrayHours[0]);
+        // console.log(convertCurrentHour);
+
+        // if ( convertArrayHours < convertCurrentHour ) {
+        //     textarea.addClass("past");
+        // } else if (convertCurrentHour === convertArrayHours) {
+        //     textarea.removeClass("past");
+        //     textarea.addClass("current");
+        //     textarea.removeClass("future");
+        // } else {
+        //     textarea.removeClass("past");
+        //     textarea.removeClass("current");
+        //     textarea.addClass("future");
+        //     console.log(textarea);
+        // }
     }
 }
 
