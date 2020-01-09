@@ -3,18 +3,21 @@
 
 $(document).ready(function(){
 
+  // using moment() method to update current date using moment.js library
   var currentDay = moment().format('dddd, MMMM Do');
 
+  // creating an h2 alement and asigning it's value to currentDay value
   var h2 = $("<h2>");
   h2.text(currentDay);
   $("#day").append(h2);
-//   row.addClass("col-12 offset-5");
+  h2.addClass("col-12 offset-4");
 
 });
 
 //-------------------------------------------------------------------------------------------------------//
 
-var hour = ["9am", "10am", "11am", "12am", "1pm", "2pm", "3pm", "4pm", "5pm"];
+// an array of standard business hours (9 a.m. to 5 p.m.). 
+var hour = ["9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM"];
 
 renderEvents();
 
@@ -24,8 +27,7 @@ function renderEvents() {
 
     for (var i = 0; i < 9; i++) {
         var now = hour[i];
-        
-    // making a row    
+         
         var row = $("<div>");
         row.addClass("row");
 
@@ -54,11 +56,54 @@ function renderEvents() {
 
         $("#put-calendar-here").append(row);
         row.addClass("col-12 offset-2");
+
+        var currentHour = moment().format('h A');
+        console.log(currentHour);
+    
+    
+    if (currentHour === hour[i]){
+        $("<textarea>").css("background-color","red");
+    }
+    
+    if(currentHour < hour[i]){
+        $("<textarea>").css("background-color","gray");
+    }
+    
+    else{
+        $("<textarea>").css("background-color","green");
+    }
     }
 }
 
 //-------------------------------------------------------------------------------------------------//
 
-// function that displays a current hour 
+//  each hour should be color coded to reflect whether the time slot is in the past, the present, or the future.
+// This will change depending on the time of day.
 
+// $(document).ready(function(){
+
+// // using moment() method to check for current hour using moment.js library
+//     var currentHour = moment().format('h A');
+//     console.log(currentHour);
+
+
+// if (currentHour === hour[i]){
+//     $("<textarea>").css("background-color","red");
+// }
+
+// if(currentHour < hour[i]){
+//     $("<textarea>").css("background-color","gray");
+// }
+
+// else{
+//     $("<textarea>").css("background-color","green");
+// }
+// renderEvents();
+// });
+
+//---------------------------------------------------------------------------------------------------//
+
+
+
+// Clicking on the save button will store the time and user input in localStorage
 
