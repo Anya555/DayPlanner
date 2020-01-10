@@ -1,15 +1,15 @@
 .hour-block, .text-block, .save-block {
     outline: 1px solid lightgray;
+    padding:0px;
 }
 
-
-.text-block{
-border-left-style:none;
-}
 
 button{
-background-color: lightskyblue;
-color:white;
+  background-color: lightskyblue;
+  color:white;
+  border-right-style: round;
+  width: 100%;
+ height: 100%;
 }
 
 textarea{
@@ -18,17 +18,9 @@ textarea{
     float:left;
     left:0px;
     padding:0px;
+    background-color: transparent;
 }
 
-button{
-    width: 100%;
-    height: 100%;
- 
-}
-
-.hour-block{
-    border-left-style: none;
-}
 
 .header{
     position: absolute;
@@ -44,14 +36,10 @@ hr{
     border-top: 3px solid black;
 }
 
-.past{ 
-    background-color:gray;
+.hour-block{
+    text-align: center;
 }
 
-.current{
-    background-color: red;
-}
-
-.future{
-    background-color:green;
+h1, h2{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
