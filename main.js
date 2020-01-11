@@ -4,11 +4,9 @@
 $(document).ready(function () {
 
     // using moment() method to update current date using moment.js library
+    
     var currentDayObj = moment();
     var currentDay = currentDayObj.format('dddd, MMMM Do');
-    currentDayObj.set('hour', 9);
-
-    console.log(currentDayObj);
 
     // creating an h2 alement and asigning it's value to currentDay value
     var h2 = $("<h2>");
@@ -30,46 +28,54 @@ $(document).ready(function () {
         "5pm": ""
     }
 
+    // Put data OBJECT into local storage
+    localStorage.setItem("storedData", JSON.stringify(storedData));
+
     // TODO: Grab data from localStorage and assign it to storedData variable
-    var getFromLocalStorage = function(){
-        var data = JSON.parse(localStorage.getItem("storedData"));
-    }
+    
+
+
+    var data = JSON.parse(localStorage.getItem("storedData"));
+    console.log(data);
 
     // TODO: Save storedData to localStorage
-   
-    // save-btn.addEventListener("click", saveToLocalStorage);
+    var button;
+
     var saveToLocalStorage = function(){
+        // Pull out the JSON OBJECT from local storage
+        let textData = localStorage.getItem('storedData');
+        console.log(textData);
+
+        // Parse The JSON OBJECT into a JavaScript OBJECT
+        let parsedData = JSON.parse(textData);
+        console.log(parsedData);
+
+        // Add the new data to the storedData JS OBJECT
+        // How do we grab the textareas value???
+        // let temp = $(this).attr('data-time');
+        let temp = $(this).siblings(".text-block");
+        console.log(temp);
+
+        storedData["9"] = 0;
+        console.log(storedData);
+
         localStorage.setItem("storedData", JSON.stringify(data));
+        console.log(data);
     }
 
     
-    console.log(storedData["9am"]);
+    // console.log(storedData["9am"]);
 
     // an array of standard business hours (9 a.m. to 5 p.m.). 
    
-    var hour = [
-        currentDayObj,
-        currentDayObj.clone().add(1, "hour"), 
-        currentDayObj.clone().add(2, "hour"),
-        currentDayObj.clone().add(3, "hour"),
-        currentDayObj.clone().add(4, "hour"),
-        currentDayObj.clone().add(5, "hour"),
-        currentDayObj.clone().add(6, "hour"),
-        currentDayObj.clone().add(7, "hour"),
-        currentDayObj.clone().add(8, "hour")
-    ];
+    var hour = [9,10,11,12,13,14,15,16,17];
 
-    // ------------------------------------------------------------------------------------------------//
-
-    renderEvents();
-
+   
     // creating an input area for each hour, event from 9am to 5 pm (total hours = 9) and save buttons
-    function renderEvents() {
+  
         for (var i = 0; i < hour.length; i++) {
-            var now = hour[i];
-            var timeText = hour[i].format("ha");
+            var timeText = (moment().hour(hour[i]).format("ha"));
 
-            console.log(hour[i])
             var row = $("<div>");
             row.addClass("row");
 
@@ -93,10 +99,13 @@ $(document).ready(function () {
             // creating save buttons    
             var saveBlock = $("<div>");
             saveBlock.addClass("col-1 save-block");
-            var button = $("<button>");
+
+
+            button = $('<button>');
             button.text("Save");
             button.addClass("save-btn");
             button.attr("data-time", timeText);
+            button.on("click", saveToLocalStorage);   //   ????
             saveBlock.append(button);
 
             row.append(hourBlock);
@@ -105,30 +114,27 @@ $(document).ready(function () {
 
             $("#put-calendar-here").append(row);
             row.addClass("col-12 offset-2");
-
         }
-    }
+    
 
 
     // Each timeblock is color coded to indicate whether it is in a past, present, or future hour.
-    function getTextBgColor(hour){
-        var now = moment();
-        console.log(now.format("H") + "|" + hour.format("H"));
+    function getTextBgColor(){
         var color = "";
-        // future
-        if( hour.format("H") < now.format("H")){
-            console.log('less');
-            color = "green";
         // current
-        } else if ( hour.format("H") === now.format("H")){
-            console.log('current');
-            color="red";
+        if( hour[i] == moment().format("H")){
+            console.log('equals');
+            color = "red";
         // past
-        } else {
-            console.log('greater');
-            color="gray";
+        } else if ( hour[i] < moment().format("H")) {
+            // console.log('current');
+            color = "lightgray";
+        // future
+        } else if ( hour[i] > moment().format("H")){
+                color = "lightgreen";
         }
         return color;
     }
+   
 });
 
