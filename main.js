@@ -16,55 +16,48 @@ $(document).ready(function () {
 
     //-------------------------------------------------------------------------------------------------//
 
-    var storedData = {
-        "9am": "",
-        "10am": "",
-        "11am": "",
-        "12pm": "",
-        "1pm": "",
-        "2pm": "",
-        "3pm": "",
-        "4pm": "",
-        "5pm": ""
+    var storedData = [];
+
+    var getFromLocalStorage = function(){
+        var localStoredData = localStorage.getItem("storedData");
+        console.log(localStoredData);
+        if (localStoredData){
+            console.log('found');
+            storedData = JSON.parse(localStoredData);
+        } else {
+            storedData = {
+                "9am": "",
+                "10am": "",
+                "11am": "",
+                "12pm": "",
+                "1pm": "",
+                "2pm": "",
+                "3pm": "",
+                "4pm": "",
+                "5pm": ""
+            }
+        }
     }
 
-    // Put data OBJECT into local storage
-    localStorage.setItem("storedData", JSON.stringify(storedData));
+    getFromLocalStorage();
 
-    // TODO: Grab data from localStorage and assign it to storedData variable
-    
-
-
-    var data = JSON.parse(localStorage.getItem("storedData"));
-    console.log(data);
-
+   
     // TODO: Save storedData to localStorage
     var button;
 
-    var saveToLocalStorage = function(){
-        // Pull out the JSON OBJECT from local storage
-        let textData = localStorage.getItem('storedData');
-        console.log(textData);
-
-        // Parse The JSON OBJECT into a JavaScript OBJECT
-        let parsedData = JSON.parse(textData);
-        console.log(parsedData);
-
-        // Add the new data to the storedData JS OBJECT
-        // How do we grab the textareas value???
-        // let temp = $(this).attr('data-time');
-        let temp = $(this).siblings(".text-block");
-        console.log(temp);
-
-        storedData["9"] = 0;
-        console.log(storedData);
-
-        localStorage.setItem("storedData", JSON.stringify(data));
-        console.log(data);
+    var updateData = function(e){
+        e.preventDefault();
+        var dataTime = $(this).attr("data-time");
+        var thisData = $("textarea[data-time = " + dataTime + "]").val();
+        storedData[dataTime] = thisData;
+        saveToLocalStorage();
     }
 
+    var saveToLocalStorage = function(){
+        
+        localStorage.setItem("storedData", JSON.stringify(storedData));
+    }
     
-    // console.log(storedData["9am"]);
 
     // an array of standard business hours (9 a.m. to 5 p.m.). 
    
@@ -79,7 +72,7 @@ $(document).ready(function () {
             var row = $("<div>");
             row.addClass("row");
 
-            // input area for hours
+
             var hourBlock = $("<div>");
             hourBlock.addClass("col-1 hour-block");
             hourBlock.text(timeText);
@@ -95,6 +88,7 @@ $(document).ready(function () {
             textarea.attr("data-time", timeText);
             textarea.val(storedData[timeText]);
             textBlock.append(textarea);
+            
 
             // creating save buttons    
             var saveBlock = $("<div>");
@@ -105,33 +99,32 @@ $(document).ready(function () {
             button.text("Save");
             button.addClass("save-btn");
             button.attr("data-time", timeText);
-            button.on("click", saveToLocalStorage);   //   ????
+            button.on("click", updateData);
             saveBlock.append(button);
-
+           
+        
             row.append(hourBlock);
             row.append(textBlock);
             row.append(saveBlock);
+            
 
             $("#put-calendar-here").append(row);
             row.addClass("col-12 offset-2");
         }
     
 
-
     // Each timeblock is color coded to indicate whether it is in a past, present, or future hour.
     function getTextBgColor(){
         var color = "";
         // current
         if( hour[i] == moment().format("H")){
-            console.log('equals');
             color = "red";
         // past
         } else if ( hour[i] < moment().format("H")) {
-            // console.log('current');
             color = "lightgray";
         // future
         } else if ( hour[i] > moment().format("H")){
-                color = "lightgreen";
+            color = "lightgreen";
         }
         return color;
     }
