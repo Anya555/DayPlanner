@@ -11,8 +11,7 @@ $(document).ready(function () {
     // creating an h2 alement and asigning it's value to currentDay value
     var h2 = $("<h2>");
     h2.text(currentDay);
-    $("#day").append(h2);
-    h2.addClass("col-12 offset-4");
+    $("#title").append(h2);
 
     //-------------------------------------------------------------------------------------------------//
 
@@ -62,6 +61,8 @@ $(document).ready(function () {
     // an array of standard business hours (9 a.m. to 5 p.m.). 
    
     var hour = [9,10,11,12,13,14,15,16,17];
+    
+
 
    
     // creating an input area for each hour, event from 9am to 5 pm (total hours = 9) and save buttons
@@ -72,14 +73,13 @@ $(document).ready(function () {
             var row = $("<div>");
             row.addClass("row");
 
-
             var hourBlock = $("<div>");
             hourBlock.addClass("col-1 hour-block");
             hourBlock.text(timeText);
 
             // input area for user to write down the events
             var textBlock = $("<div>");
-            textBlock.addClass("col-6 text-block");
+            textBlock.addClass("col-10 text-block");
           
             // Determine color
             var bgColor = getTextBgColor(hour[i]);
@@ -109,7 +109,6 @@ $(document).ready(function () {
             
 
             $("#put-calendar-here").append(row);
-            row.addClass("col-12 offset-2");
         }
     
 
